@@ -1,72 +1,37 @@
 import os
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 
+BREVO_API_KEY = os.getenv("BREVO_API_KEY")
+
 def send_email(recipient_email: str, subject: str, body: str, reply_to: str | None = None) -> dict:
-    """
-    Send email using Gmail SMTP.
-    
-    Args:
-        recipient_email: Email address of the recipient
-        subject: Email subject line
-        body: Email body content
-        reply_to: Optional reply-to email address
-        
-    Returns:
-        dict: Status of email sending with 'success' boolean and 'message' string
-    """
     try:
-        email_user = os.getenv("EMAIL_USER")
-        email_pass = os.getenv("EMAIL_PASS")
+        url = "https://api.brevo.com/v3/smtp/email"
         
-        if not email_user or not email_pass:
-            return {
-                "success": False,
-                "message": "Email credentials not configured. Please set EMAIL_USER and EMAIL_PASS environment variables."
-            }
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "api-key": BREVO_API_KEY
+        }
         
-        # Create message
-        msg = MIMEMultipart()
-        msg['From'] = email_user
-        msg['To'] = recipient_email
-        msg['Subject'] = subject
+        payload = {
+            "sender": {"name": "Resumail", "email": "gaurisharma90043@gmail.com"},
+            "to": [{"email": recipient_email}],
+            "subject": subject,
+            "textContent": body
+        }
+        
         if reply_to:
-            msg['Reply-To'] = reply_to
+            payload["replyTo"] = {"email": reply_to}
         
-        # Add body to email
-        msg.attach(MIMEText(body, 'plain'))
+        response = requests.post(url, json=payload, headers=headers)
         
-        # Send email using SMTP_SSL
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-            server.login(email_user, email_pass)
-            server.send_message(msg)
-        
-        return {
-            "success": True,
-            "message": f"Email successfully sent to {recipient_email}"
-        }
-        
-    except smtplib.SMTPAuthenticationError:
-        return {
-            "success": False,
-            "message": "Authentication failed. Please check your email credentials."
-        }
-    except smtplib.SMTPRecipientsRefused:
-        return {
-            "success": False,
-            "message": f"Invalid recipient email address: {recipient_email}"
-        }
-    except smtplib.SMTPException as e:
-        return {
-            "success": False,
-            "message": f"SMTP error occurred: {str(e)}"
-        }
+        if response.status_code == 201:
+            return {"success": True, "message": f"Email successfully sent to {recipient_email}"}
+        else:
+            return {"success": False, "message": f"Failed to send email: {response.text}"}
+            
     except Exception as e:
-        return {
-            "success": False,
-            "message": f"An unexpected error occurred: {str(e)}"
-        }
+        return {"success": False, "message": f"An unexpected error occurred: {str(e)}"}

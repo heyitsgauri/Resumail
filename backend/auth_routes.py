@@ -1,14 +1,17 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Request, Form
+from pathlib import Path
+
+from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
+
+from auth import create_access_token, hash_password, verify_password
 from database import get_db
 from models import User
-from schemas import UserRegister, UserLogin, TokenResponse
-from auth import hash_password, verify_password, create_access_token
 
 router = APIRouter()
-templates = Jinja2Templates(directory="templates")
+BASE_DIR = Path(__file__).resolve().parent
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 @router.get("/register", response_class=HTMLResponse)
 async def register_page(request: Request):

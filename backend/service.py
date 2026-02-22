@@ -1,13 +1,22 @@
-import os
-from groq import Groq
-from dotenv import load_dotenv
 import json
+import os
+from pathlib import Path
 
-load_dotenv()
+from dotenv import load_dotenv
+from groq import Groq
+
+BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(BASE_DIR / ".env")
+
 
 class EmailGnerator:
     def __init__(self):
-        self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            raise ValueError("GROQ_API_KEY is missing in environment")
+
+        # Keep timeout bounded so requests fail fast instead of hanging.
+        self.client = Groq(api_key=api_key, timeout=20, max_retries=1)
 
     def generate_email_from_resume_text(
         self,
@@ -26,11 +35,13 @@ class EmailGnerator:
             contact_lines.append(f"Phone: {applicant_phone}")
         contact_block = "\n".join(contact_lines) if contact_lines else ""
 
+        trimmed_resume = resume_text[:12000]
+
         prompt = f"""
         Based on the following resume, generate a professional job application email for the {job_position} position.
 
         Resume Content:
-        {resume_text}
+        {trimmed_resume}
 
         Generate a plain text email (NO markdown, NO formatting) with:
         - Professional subject line
@@ -78,4 +89,9 @@ class EmailGnerator:
                     "status": "success"
                 }
         except Exception as e:
-            print(f"Error generating email {e}")
+            return {
+                "subject": "",
+                "body": "",
+                "status": "error",
+                "message": f"Error generating email: {str(e)}"
+            }

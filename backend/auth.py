@@ -1,14 +1,19 @@
 import os
 from datetime import datetime, timedelta
+from pathlib import Path
+
+from dotenv import load_dotenv
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from dotenv import load_dotenv
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY is missing in environment")
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
