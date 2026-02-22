@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-12 max-w-4xl">
+        <div class="bg-white rounded-lg shadow-xl p-8">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <a href="/" class="text-blue-600 hover:text-blue-800 underline text-sm">← Back to Home</a>
+                    <a href="/logout" class="text-red-600 hover:text-red-800 underline text-sm">Logout</a>
+                </div>
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">Your Email History</h1>
+            </div>
+
+            {% if history %}
+                <div class="space-y-4">
+                    {% for item in history %}
+                    <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">
+                                    <strong class="text-gray-700">Position:</strong> {{ item.job_position }}
+                                </p>
+                                <p class="text-sm text-gray-500 mb-1">
+                                    <strong class="text-gray-700">Sent To:</strong> {{ item.recipient_email }}
+                                </p>
+                                <p class="text-sm text-gray-500 mb-1">
+                                    <strong class="text-gray-700">Sent At:</strong> {{ item.sent_at.strftime('%d %b %Y, %I:%M %p') }}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <p class="text-sm text-gray-500 mb-1">
+                                <strong class="text-gray-700">Subject:</strong>
+                            </p>
+                            <p class="text-gray-800 font-semibold">{{ item.subject }}</p>
+                        </div>
+
+                        <details class="mt-3">
+                            <summary class="cursor-pointer text-blue-600 hover:text-blue-800 font-medium">
+                                View Email Body
+                            </summary>
+                            <div class="mt-3 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                                <pre class="whitespace-pre-wrap text-gray-800 font-sans text-sm">{{ item.body }}</pre>
+                            </div>
+                        </details>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-12">
+                    <p class="text-gray-600 mb-4">No emails sent yet.</p>
+                    <a href="/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
+                        Send Your First Email
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

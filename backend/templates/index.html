@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Job Application Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-12 max-w-2xl">
+        <div class="bg-white rounded-lg shadow-xl p-8">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <a href="/history" class="text-blue-600 hover:text-blue-800 underline text-sm">View History</a>
+                    <a href="/logout" class="text-red-600 hover:text-red-800 underline text-sm">Logout</a>
+                </div>
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">AI Job Application Generator</h1>
+                <p class="text-gray-600">Generate professional job application emails powered by AI</p>
+            </div>
+
+            <!-- Form -->
+            <form action="/generate-email" method="post" enctype="multipart/form-data" class="space-y-6">
+                <!-- Resume Upload -->
+                <div>
+                    <label for="resume_file" class="block text-sm font-medium text-gray-700 mb-2">
+                        Upload Resume (PDF)
+                    </label>
+                    <input 
+                        type="file" 
+                        id="resume_file" 
+                        name="resume_file" 
+                        accept=".pdf"
+                        required
+                        class="block w-full text-sm text-gray-500
+                               file:mr-4 file:py-2 file:px-4
+                               file:rounded-lg file:border-0
+                               file:text-sm file:font-semibold
+                               file:bg-blue-50 file:text-blue-700
+                               hover:file:bg-blue-100
+                               border border-gray-300 rounded-lg p-2
+                               focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                    <p class="mt-1 text-xs text-gray-500">Only PDF files are accepted</p>
+                </div>
+
+                <!-- Job Position -->
+                <div>
+                    <label for="job_position" class="block text-sm font-medium text-gray-700 mb-2">
+                        Job Position
+                    </label>
+                    <input 
+                        type="text" 
+                        id="job_position" 
+                        name="job_position" 
+                        required
+                        placeholder="e.g., Software Engineer, Data Scientist, Product Manager"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg
+                               focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                               placeholder-gray-400"
+                    >
+                </div>
+
+                <!-- Recipient Email -->
+                <div>
+                    <label for="recipient_email" class="block text-sm font-medium text-gray-700 mb-2">
+                        Recipient Email
+                    </label>
+                    <input 
+                        type="email" 
+                        id="recipient_email" 
+                        name="recipient_email" 
+                        required
+                        placeholder="hiring.manager@company.com"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg
+                               focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                               placeholder-gray-400"
+                    >
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                    type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold
+                           py-3 px-6 rounded-lg transition duration-200
+                           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                           disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    Generate Email
+                </button>
+            </form>
+
+            <!-- Info Box -->
+            <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <p class="text-sm text-blue-800">
+                    <strong>Note:</strong> This tool will generate a personalized job application email based on your resume and send it directly to the recipient email address.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
