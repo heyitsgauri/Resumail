@@ -12,12 +12,12 @@ from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from auth import decode_access_token
-from auth_routes import router as auth_router
-from database import engine, get_db
-from email_service import send_email
-from models import Base, EmailHistory
-from service import EmailGnerator
+from backend.auth import decode_access_token
+from backend.auth_routes import router as auth_router
+from backend.database import engine, get_db
+from backend.email_service import send_email
+from backend.models import Base, EmailHistory
+from backend.service import EmailGnerator
 
 BASE_DIR = Path(__file__).resolve().parent
 

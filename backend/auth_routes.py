@@ -7,10 +7,10 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
-from auth import create_access_token, hash_password, verify_password
-from database import get_db
-from models import User
-from email_service import send_email
+from backend.auth import create_access_token, hash_password, verify_password
+from backend.database import get_db
+from backend.models import User
+from backend.email_service import send_email
 
 router = APIRouter()
 BASE_DIR = Path(__file__).resolve().parent
