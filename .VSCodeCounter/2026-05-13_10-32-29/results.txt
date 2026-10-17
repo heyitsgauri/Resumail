@@ -1,0 +1,53 @@
+Date : 2026-05-13 10:32:29
+Directory : c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main
+Total : 20 files,  1154 codes, 76 comments, 211 blanks, all 1441 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| Python           |          9 |        523 |         51 |        124 |        698 |
+| HTML             |          7 |        475 |         25 |         46 |        546 |
+| Markdown         |          1 |         80 |          0 |         31 |        111 |
+| pip requirements |          1 |         39 |          0 |          0 |         39 |
+| YAML             |          1 |         30 |          0 |          3 |         33 |
+| Docker           |          1 |          7 |          0 |          7 |         14 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                               | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                  |         20 |      1,154 |         76 |        211 |      1,441 |
+| . (Files)                                                                                          |          3 |        117 |          0 |         41 |        158 |
+| backend                                                                                            |         17 |      1,037 |         76 |        170 |      1,283 |
+| backend (Files)                                                                                    |         10 |        562 |         51 |        124 |        737 |
+| backend\templates                                                                                  |          7 |        475 |         25 |         46 |        546 |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                           | language         | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\Dockerfile                      | Docker           |          7 |          0 |          7 |         14 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\README.md                       | Markdown         |         80 |          0 |         31 |        111 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\auth.py                 | Python           |         29 |          0 |          9 |         38 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\auth_routes.py          | Python           |        112 |          4 |         26 |        142 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\database.py             | Python           |         20 |          0 |          6 |         26 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\email_service.py        | Python           |         28 |          0 |          9 |         37 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\main.py                 | Python           |        239 |          8 |         46 |        293 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\model.py                | Python           |          4 |          0 |          1 |          5 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\models.py               | Python           |         24 |          0 |          7 |         31 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\requirements.txt        | pip requirements |         39 |          0 |          0 |         39 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\schemas.py              | Python           |         20 |          2 |          6 |         28 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\service.py              | Python           |         47 |         37 |         14 |         98 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\templates\history.html  | HTML             |         64 |          1 |          4 |         69 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\templates\index.html    | HTML             |         90 |          7 |          6 |        103 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\templates\login.html    | HTML             |         50 |          0 |          6 |         56 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\templates\preview.html  | HTML             |         92 |          8 |         10 |        110 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\templates\register.html | HTML             |         50 |          0 |          6 |         56 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\templates\result.html   | HTML             |         81 |          8 |          7 |         96 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\backend\templates\verify.html   | HTML             |         48 |          1 |          7 |         56 |
+| c:\Users\Gauri Sharma\Documents\Projects\PP\AI-Job-Applicaion-main\docker-compose.yml              | YAML             |         30 |          0 |          3 |         33 |
+| Total                                                                                              |                  |      1,154 |         76 |        211 |      1,441 |
++----------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

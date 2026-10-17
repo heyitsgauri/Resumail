@@ -62,11 +62,16 @@ Add your keys to `backend/.env`:
 ```env
 DATABASE_URL=postgresql://postgres:password@db:5432/jobapp_db
 GROQ_API_KEY=your_groq_key
+GROQ_MODEL=llama-3.3-70b-versatile
 BREVO_API_KEY=your_brevo_key
+BREVO_SENDER_EMAIL=youremail@gmail.com
 SECRET_KEY=your_secret_key
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
+
+`BREVO_SENDER_EMAIL` must be a sender address verified in Brevo. If it is unset,
+the backend uses `EMAIL_USER` as the sender address.
 
 Then start everything:
 

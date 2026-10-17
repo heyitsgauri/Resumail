@@ -21,6 +21,7 @@ class EmailHistoryItem(BaseModel):
     job_position: str
     subject: str
     body: str
+    
     sent_at: datetime
 
     class Config:

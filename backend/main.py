@@ -71,7 +71,6 @@ app.add_middleware(LoggingMiddleware)
 app.include_router(auth_router)
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
-
 # Authentication middleware for protected routes.
 @app.middleware("http")
 async def auth_middleware(request: Request, call_next):

@@ -1,11 +1,13 @@
-from pathlib import Path
+import logging
 import random
 from datetime import datetime, timedelta
+from pathlib import Path
 
 from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
+from starlette.concurrency import run_in_threadpool
 
 from backend.auth import create_access_token, hash_password, verify_password
 from backend.database import get_db
@@ -13,6 +15,7 @@ from backend.models import User
 from backend.email_service import send_email
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
@@ -43,6 +46,9 @@ async def register(
         user = User(email=email, hashed_password=hashed)
         db.add(user)
         
+    previous_otp = user.otp
+    previous_expiry = user.otp_expiry
+
     # Generate OTP
     otp_code = str(random.randint(100000, 999999))
     user.otp = otp_code
@@ -53,7 +59,18 @@ async def register(
     # Send Email
     subject = "Verify your Resumail Account"
     body = f"Your verification code is: {otp_code}. It will expire in 10 minutes."
-    send_email(recipient_email=email, subject=subject, body=body)
+    email_result = await run_in_threadpool(
+        send_email, recipient_email=email, subject=subject, body=body
+    )
+    if not email_result["success"]:
+        user.otp = previous_otp
+        user.otp_expiry = previous_expiry
+        db.commit()
+        logger.error("OTP email delivery failed: %s", email_result["message"])
+        return templates.TemplateResponse("register.html", {
+            "request": request,
+            "error": "We couldn't send your verification email. Please check the server email configuration and try again."
+        })
     
     return RedirectResponse(url=f"/verify-otp?email={email}", status_code=302)
 
